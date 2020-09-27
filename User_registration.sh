@@ -43,3 +43,15 @@ else
 	echo -e "\nInvalid Email"
 fi
 
+#Checking Mobile Number
+echo -e "\nEnter your mobile number as follows country code(91) space 10-digit number(1234567891)"
+read mob_num
+
+pat="^91 [6-9]{1}[0-9]{9}$"
+
+if [[ $mob_num =~ $pat ]]
+then
+	echo -e "\nValid mobile number"
+else
+	echo -e "\nInvalid mobile number"
+fi
