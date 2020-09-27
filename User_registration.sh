@@ -56,8 +56,8 @@ else
 	echo -e "\nInvalid mobile number"
 fi
 
-#Checking condition 1 and 2 for password (length is more than 8 and contains atleast 1 uppercase letter)
-echo -e "\nEnter the password (min 8 characters and atleast 1 uppercase letter)"
+#Checking condition 1, 2, 3 and 4 for password (length is more than 8, contains atleast 1 uppercase letter and 1 digit and only one special character)
+echo -e "\nEnter the password (min 8 characters, atleast 1 digit and uppercase letter and only one special character)"
 read password
 
 #Pattern to check if the length of the password is more than 8
@@ -70,11 +70,21 @@ then
 
 	if [[ $password =~ $pat ]]
 	then
+		#Pattern check if there is a digit present
 		pat="[0-9]{1,}"
 
 		if [[ $password =~ $pat ]]
 		then
-			echo -e "\nThe password entered is valid"
+			#Pattern checks if there is only one special character present
+			pat="[!@#$%^&*()_+=]{1}"
+
+			if [[ $password =~ $pat ]]
+			then
+				echo -e "\nThe password entered is valid"
+			else
+				echo -e "\nPassword doesn't contain a single special character"
+			fi
+
 		else
 			echo -e "\nThe password entered does not contain a digit"
 		fi
