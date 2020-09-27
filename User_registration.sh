@@ -28,3 +28,18 @@ echo -e "\nEnter your last name"
 read last_name
 
 check_name $last_name
+
+#Checking email
+echo -e "\nEnter your email id"
+read email
+
+#Pattern check works in regix101.com but does not work in git bash
+pat="^[0-9[:upper:][:lower:]]{2,}+([._+-][0-9[:upper:][:lower:]]{1,})?@[0-9[:upper:][:lower:]]{1,}+[.]{1}[[:lower:]{2,}([.]{1}[[:lower:]]{2,})?$"
+
+if [[ $email =~ $pat ]]
+then
+	echo -e "\nValid Email"
+else
+	echo -e "\nInvalid Email"
+fi
+
