@@ -55,3 +55,17 @@ then
 else
 	echo -e "\nInvalid mobile number"
 fi
+
+#Checking condition 1 for password (length is more than 8)
+echo -e "\nEnter the password (min 8 characters)"
+read password
+
+#Pattern to check if the length of the password is more than 8
+pat=".{8}"
+
+if [[ $password =~ $pat ]]
+then
+	echo -e "\nThe password entered is valid"
+else
+	echo -e "\nThe password entered is less than 8 characters"
+fi
