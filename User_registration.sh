@@ -70,7 +70,15 @@ then
 
 	if [[ $password =~ $pat ]]
 	then
-		echo -e "\nThe password entered is valid"
+		pat="[0-9]{1,}"
+
+		if [[ $password =~ $pat ]]
+		then
+			echo -e "\nThe password entered is valid"
+		else
+			echo -e "\nThe password entered does not contain a digit"
+		fi
+
 	else
 		echo -e "\nThe password entered does not contain an uppercase letter"
 	fi
