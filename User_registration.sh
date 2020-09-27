@@ -34,9 +34,9 @@ echo -e "\nEnter your email id"
 read email
 
 #Pattern check works in regix101.com but does not work in git bash
-pat="^[0-9[:upper:][:lower:]]{2,}+([._+-][0-9[:upper:][:lower:]]{1,})?@[0-9[:upper:][:lower:]]{1,}+[.]{1}[[:lower:]{2,}([.]{1}[[:lower:]]{2,})?$"
+email_pat="^[0-9[:upper:][:lower:]]{2,}+([._+-][0-9[:upper:][:lower:]]{1,})?@[0-9[:upper:][:lower:]]{1,}+[.]{1}[[:lower:]{2,}([.]{1}[[:lower:]]{2,})?$"
 
-if [[ $email =~ $pat ]]
+if [[ $email =~ $email_pat ]]
 then
 	echo -e "\nValid Email"
 else
@@ -96,3 +96,60 @@ then
 else
 	echo -e "\nThe password entered is less than 8 characters"
 fi
+
+#Checking all 22 email samples using array
+#Storing sample emails in a array
+a[1]="abc@yahoo.com"
+a[2]="abc-100@yahoo.com"
+a[3]="abc.100@yahoo.com"
+a[4]="abc111@abc.com"
+a[5]="abc-100@abc.net"
+a[6]="abc.100@abc.com.au"
+a[7]="abc@1.com"
+a[8]="abc@gmail.com.com"
+a[9]="abc+100@gmail.com"
+a[10]="abc"
+a[11]="abc@.com.ny"
+a[12]="abc123@gmail.c"
+a[13]="abc123@.com"
+a[14]="abc123@.com.com"
+a[15]=".abc@abc.com"
+a[16]="abc()*@gmail.com"
+a[17]="abc@%*.com"
+a[18]="abc..2002@gmail.com"
+a[19]="abc.@gmail.com"
+a[20]="abc@abc@gmail.com"
+a[21]="abc@gmail.com.1a"
+a[22]="abc@gmail.com.aa.au"
+
+echo -e "\nChecking sample emails for the validity of the pattern search"
+
+#Variables
+vcount=0
+icount=0
+
+for (( i=1 ; i<23 ; i++ ))
+do
+	if [[ a[i] =~ $email_pat ]]
+	then
+		valid_email[vcount]=${a[i]}
+		((vcount++))
+	else
+		invalid_email[icount]=${a[i]}
+		((icount++))
+	fi
+done
+
+echo -e "\nValid email samples are"
+
+for (( i=0 ; i<=vcount ; i++ ))
+do
+	echo ${valid_email[$i]}
+done
+
+echo -e "\nInvalid email samples are"
+
+for (( i=0 ; i<=icount ; i++ ))
+do
+	echo ${invalid_email[$i]}
+done
