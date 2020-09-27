@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e "\nWelcome to User Registration"
-echo -e "This program ensures all the validations are in place during the User Entry\n"
+echo -e "This program ensures all the validations are in place during the User Entry"
 
 #Function to check if the name starts with caps and has min 3 characters
 function check_name() {
@@ -13,89 +13,120 @@ function check_name() {
 	if [[ $1 =~ $pat ]]
 	then
 		echo -e "\nThe name is valid"
+		((count++))
 	else
 		echo -e "\nThe name is invalid"
 	fi
 
 }
 
-echo "Enter your first name"
-read first_name
 
-check_name $first_name
+#Variable
+count=0
 
-echo -e "\nEnter your last name"
-read last_name
+while [[ $count -eq 0 ]]
+do
 
-check_name $last_name
+	echo -e "\nEnter your first name"
+	read first_name
 
-#Checking email
-echo -e "\nEnter your email id"
-read email
+	check_name $first_name
+done
 
-#Pattern check works in regix101.com but does not work in git bash
-email_pat="^[0-9[:upper:][:lower:]]{2,}+([._+-][0-9[:upper:][:lower:]]{1,})?@[0-9[:upper:][:lower:]]{1,}+[.]{1}[[:lower:]{2,}([.]{1}[[:lower:]]{2,})?$"
+count=0
 
-if [[ $email =~ $email_pat ]]
-then
-	echo -e "\nValid Email"
-else
-	echo -e "\nInvalid Email"
-fi
+while [[ $count -eq 0 ]]
+do
+	echo -e "\nEnter your last name"
+	read last_name
 
-#Checking Mobile Number
-echo -e "\nEnter your mobile number as follows country code(91) space 10-digit number(1234567891)"
-read mob_num
+	check_name $last_name
+done
 
-pat="^91 [6-9]{1}[0-9]{9}$"
+count=0
 
-if [[ $mob_num =~ $pat ]]
-then
-	echo -e "\nValid mobile number"
-else
-	echo -e "\nInvalid mobile number"
-fi
+while [[ $count -eq 0 ]]
+do
+	#Checking email
+	echo -e "\nEnter your email id"
+	read email
 
-#Checking condition 1, 2, 3 and 4 for password (length is more than 8, contains atleast 1 uppercase letter and 1 digit and only one special character)
-echo -e "\nEnter the password (min 8 characters, atleast 1 digit and uppercase letter and only one special character)"
-read password
+	#Pattern check works in regix101.com but does not work in git bash
+	email_pat="^[0-9[:upper:][:lower:]]{2,}+([._+-][0-9[:upper:][:lower:]]{1,})?@[0-9[:upper:][:lower:]]{1,}+[.]{1}[[:lower:]{2,}([.]{1}[[:lower:]]{2,})?$"
 
-#Pattern to check if the length of the password is more than 8
-pat=".{8}"
+	if [[ $email =~ $email_pat ]]
+	then
+		echo -e "\nValid Email"
+		((count++))
+	else
+		echo -e "\nInvalid Email"
+	fi
+done
 
-if [[ $password =~ $pat ]]
-then
-	#Pattern checks if there is an uppercase letter present
-	pat="[[:upper:]]{1,}"
+count=0
+while [[ $count -eq 0 ]]
+do
+	#Checking Mobile Number
+	echo -e "\nEnter your mobile number as follows country code(91) space 10-digit number(1234567891)"
+	read mob_num
+
+	pat="^91 [6-9]{1}[0-9]{9}$"
+
+	if [[ $mob_num =~ $pat ]]
+	then
+		echo -e "\nValid mobile number"
+		((count++))
+	else
+		echo -e "\nInvalid mobile number"
+	fi
+done
+
+count=0
+
+while [[ $count -eq 0 ]]
+do
+	#Checking condition 1, 2, 3 and 4 for password (length is more than 8, contains atleast 1 uppercase letter and 1 digit and only one special character)
+	echo -e "\nEnter the password (min 8 characters, atleast 1 digit and uppercase letter and only one special character)"
+	read password
+
+	#Pattern to check if the length of the password is more than 8
+	pat=".{8}"
 
 	if [[ $password =~ $pat ]]
 	then
-		#Pattern check if there is a digit present
-		pat="[0-9]{1,}"
+		#Pattern checks if there is an uppercase letter present
+		pat="[[:upper:]]{1,}"
 
 		if [[ $password =~ $pat ]]
 		then
-			#Pattern checks if there is only one special character present
-			pat="[!@#$%^&*()_+=]{1}"
+			#Pattern check if there is a digit present
+			pat="[0-9]{1,}"
 
 			if [[ $password =~ $pat ]]
 			then
-				echo -e "\nThe password entered is valid"
+				#Pattern checks if there is only one special character present
+				pat="[!@#$%^&*()_+=]{1}"
+
+				if [[ $password =~ $pat ]]
+				then
+					echo -e "\nThe password entered is valid"
+					((count++))
+				else
+					echo -e "\nPassword doesn't contain a single special character"
+				fi
+
 			else
-				echo -e "\nPassword doesn't contain a single special character"
+				echo -e "\nThe password entered does not contain a digit"
 			fi
 
 		else
-			echo -e "\nThe password entered does not contain a digit"
+			echo -e "\nThe password entered does not contain an uppercase letter"
 		fi
 
 	else
-		echo -e "\nThe password entered does not contain an uppercase letter"
+		echo -e "\nThe password entered is less than 8 characters"
 	fi
-
-else
-	echo -e "\nThe password entered is less than 8 characters"
-fi
+done
 
 #Checking all 22 email samples using array
 #Storing sample emails in a array
