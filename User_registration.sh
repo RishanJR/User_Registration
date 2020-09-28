@@ -51,8 +51,8 @@ do
 	echo -e "\nEnter your email id"
 	read email
 
-	#Pattern check works in regix101.com but does not work in git bash
-	email_pat="^[0-9[:upper:][:lower:]]{2,}+([._+-][0-9[:upper:][:lower:]]{1,})?@[0-9[:upper:][:lower:]]{1,}+[.]{1}[[:lower:]{2,}([.]{1}[[:lower:]]{2,})?$"
+	#Pattern check for email
+	email_pat="^[[:lower:]]{1,}[._-+]{0,1}[[:lower:]0-9]{1,}\@[[:lower:]0-9]{1,}[\.]{1}[[:lower:]]{2,}([.]{0,}[[:lower:]]{2,})?$"
 
 	if [[ $email =~ $email_pat ]]
 	then
@@ -161,7 +161,7 @@ icount=0
 
 for (( i=1 ; i<23 ; i++ ))
 do
-	if [[ a[i] =~ $email_pat ]]
+	if [[ ${a[i]} =~ $email_pat ]]
 	then
 		valid_email[vcount]=${a[i]}
 		((vcount++))
