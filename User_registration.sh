@@ -52,7 +52,7 @@ do
 	read email
 
 	#Pattern check for email
-	email_pat="^[[:lower:]]{1,}[._-+]{0,1}[[:lower:]0-9]{1,}\@[[:lower:]0-9]{1,}[\.]{1}[[:lower:]]{2,}([.]{0,}[[:lower:]]{2,})?$"
+	email_pat="^[[:lower:]]{1,}[._+\-]{0,1}[[:lower:]0-9]{1,}\@[[:lower:]0-9]{1,}[\.]{1}[[:lower:]]{2,}([.]{0,}[[:lower:]]{2,})?$"
 
 	if [[ $email =~ $email_pat ]]
 	then
